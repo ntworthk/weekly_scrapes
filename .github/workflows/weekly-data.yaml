@@ -1,0 +1,40 @@
+on:
+  schedule:
+    - cron: '36 1 * * 5'
+  workflow_dispatch:
+
+name: weekly-data
+
+jobs:
+  refresh-data:
+    runs-on: macOS-latest
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      R_KEEP_PKG_SOURCE: yes
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: '4.3.3'
+          use-public-rspm: true
+          
+      - name: Install vctrs
+        run: Rscript -e 'install.packages(c("vctrs"))'
+
+      - name: Install packages
+        run: Rscript -e 'install.packages(c("tidyverse", "rvest", "here"))'
+        
+      - name: Install arrow
+        run: Rscript -e 'install.packages("arrow", repos = c("https://apache.r-universe.dev", "https://cloud.r-project.org"))'
+
+      - name: Get data - IGA
+        run: Rscript -e 'source(here::here("source", "iga.R"), echo = TRUE)'
+        
+      - name: Commit
+        run: |
+          git config --global user.name 'Nick Twort'
+          git config --global user.email 'nwbort@github.com'
+          git add .
+          git commit -m 'refreshing data' || echo "No changes to commit"
+          git push || echo "No changes to commit"
