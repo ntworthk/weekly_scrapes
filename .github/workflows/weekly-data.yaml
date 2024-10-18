@@ -28,6 +28,9 @@ jobs:
       - name: Install arrow
         run: Rscript -e 'install.packages("arrow", repos = c("https://apache.r-universe.dev", "https://cloud.r-project.org"))'
 
+      - name: Get data - Aldi
+        run: Rscript -e 'source(here::here("source", "aldi.R"), echo = TRUE)'
+        
       - name: Get data - IGA
         run: Rscript -e 'source(here::here("source", "iga.R"), echo = TRUE)'
         
