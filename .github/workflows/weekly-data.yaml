@@ -31,6 +31,9 @@ jobs:
       - name: Get data - Aldi
         run: Rscript -e 'source(here::here("source", "aldi.R"), echo = TRUE)'
         
+      - name: Get data - Kmart
+        run: Rscript -e 'source(here::here("source", "kmart.R"), echo = TRUE)'
+        
       - name: Get data - IGA
         run: Rscript -e 'source(here::here("source", "iga.R"), echo = TRUE)'
         
