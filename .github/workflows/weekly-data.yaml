@@ -37,6 +37,9 @@ jobs:
       - name: Get data - IGA
         run: Rscript -e 'source(here::here("source", "iga.R"), echo = TRUE)'
         
+      - name: Get data - WW
+        run: Rscript -e 'source(here::here("source", "woolworths.R"), echo = TRUE)'
+        
       - name: Get data - BIG W
         run: Rscript -e 'source(here::here("source", "bigw.R"), echo = TRUE)'
         
