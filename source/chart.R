@@ -1,15 +1,3 @@
----
-format: gfm
----
-
-<!-- README.md is generated from README.qmd. Please edit that file -->
-
-# weekly_scrapes
-
-```{r}
-#| echo: false
-#| warning: false
-
 library(arrow)
 library(tidyverse)
 
@@ -27,9 +15,10 @@ df <- map_dfr(data, function(file) {
   arrange(desc(n)) |> 
   mutate(Store = fct_inorder(Store))
 
-df |> 
+g <- df |> 
   ggplot(aes(x = n, y = Store)) + 
   geom_col(fill = "#008698") +
+  geom_text(aes(label = n), hjust = 1.05, colour = "white") +
   geom_vline(xintercept = 0) +
   labs(x = NULL, y = NULL, title = paste0("Number of stores as at ", format(max(df$timestamp), "%d %B %Y"))) +
   theme_minimal(base_size = 12) +
@@ -43,6 +32,10 @@ df |>
     strip.background = element_rect(fill = "#E6E7E8")
   )
 
-
-```
-
+ggsave(filename = "README_files/figure-commonmark/unnamed-chunk-1-1.png",
+       plot = g,
+       width = 17.00,
+       height = 8,
+       units = "cm",
+       bg = "transparent"
+)

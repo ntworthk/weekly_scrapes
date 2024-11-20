@@ -46,6 +46,9 @@ jobs:
       - name: Get data - Bunnings
         run: Rscript -e 'source(here::here("source", "bunnings.R"), echo = TRUE)'
         
+      - name: Update chart
+        run: Rscript -e 'source(here::here("source", "chart.R"), echo = TRUE)'
+        
       - name: Commit
         run: |
           git config --global user.name 'Nick Twort'
