@@ -7,7 +7,7 @@ name: weekly-data
 
 jobs:
   refresh-data:
-    runs-on: macOS-latest
+    runs-on: macOS-13
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       R_KEEP_PKG_SOURCE: yes
