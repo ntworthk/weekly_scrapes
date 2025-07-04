@@ -39,10 +39,7 @@ jobs:
         
       - name: Get data - WW
         run: Rscript -e 'source(here::here("source", "woolworths.R"), echo = TRUE)'
-        
-      - name: Get data - BIG W
-        run: Rscript -e 'source(here::here("source", "bigw.R"), echo = TRUE)'
-        
+                
       - name: Get data - Bunnings
         run: Rscript -e 'source(here::here("source", "bunnings.R"), echo = TRUE)'
         
